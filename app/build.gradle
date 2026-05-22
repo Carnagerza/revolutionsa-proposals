@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
+
 android {
+    namespace "co.za.revsa.proposals"
     compileSdkVersion 33
+
     defaultConfig {
         applicationId "co.za.revsa.proposals"
         minSdkVersion 22
@@ -8,25 +11,19 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    signingConfigs {
-        release {
-            storeFile file("../../keystore/revsa.keystore")
-            storePassword "RevSA2026"
-            keyAlias "revsaproposals"
-            keyPassword "RevSA2026"
-        }
-    }
+
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
 }
