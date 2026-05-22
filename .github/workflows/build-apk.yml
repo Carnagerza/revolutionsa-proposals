@@ -25,20 +25,33 @@ jobs:
         run: sdkmanager --sdk_root=$ANDROID_HOME "platforms;android-33" "build-tools;33.0.2"
 
       - name: Copy HTML to assets
-        run: cp www/index.html app/src/main/assets/www/index.html
+        run: |
+          mkdir -p app/src/main/assets/www
+          cp www/index.html app/src/main/assets/www/index.html
 
       - name: Generate icons
         run: python3 scripts/make_icons.py
 
-      - name: Setup Gradle wrapper
-        run: gradle wrapper --gradle-version 8.1.1 && chmod +x gradlew
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
       - name: Build APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Sign APK
+        run: |
+          BUILD_TOOLS=$ANDROID_HOME/build-tools/33.0.2
+          APK=app/build/outputs/apk/release/app-release-unsigned.apk
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore keystore/revsa.keystore \
+            -storepass RevSA2026 -keypass RevSA2026 \
+            "$APK" revsaproposals
+          $BUILD_TOOLS/zipalign -v 4 "$APK" RevSA-Proposals.apk
+          ls -lh RevSA-Proposals.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: RevSA-Proposals-APK
-          path: app/build/outputs/apk/release/*.apk
+          path: RevSA-Proposals.apk
           retention-days: 30
