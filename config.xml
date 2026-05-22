@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="co.za.revsa.proposals" version="1.0.0"
+  xmlns="http://www.w3.org/ns/widgets"
+  xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>RevSA Proposals</name>
+  <description>Revolution SA Sales Proposal System</description>
+  <author email="info@revsa.co.za" href="https://revsa.co.za">Revolution SA</author>
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="mailto:*" />
+  <preference name="android-minSdkVersion" value="22" />
+  <preference name="android-targetSdkVersion" value="33" />
+  <preference name="DisallowOverscroll" value="true" />
+  <preference name="BackgroundColor" value="0xff1a1a1a" />
+  <platform name="android">
+    <allow-intent href="market:*" />
+  </platform>
+</widget>
