@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "co.za.revsa.proposals"
-        minSdkVersion 22
+        minSdkVersion 16
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -22,8 +23,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    splits {
+        abi {
+            enable false
+        }
+    }
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
