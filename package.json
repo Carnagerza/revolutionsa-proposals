@@ -6,6 +6,6 @@
     "platforms": ["android"]
   },
   "dependencies": {
-    "cordova-android": "^12.0.0"
+    "cordova-android": "12.0.1"
   }
 }
